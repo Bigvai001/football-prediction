@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haven Clipper Football Predictions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a472a, #0a2f1f);
+            color: white;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        input {
+            padding: 12px;
+            margin: 10px;
+            border-radius: 10px;
+            border: none;
+            width: 200px;
+        }
+        button {
+            background: orange;
+            color: black;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background: darkorange;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.5);
+        }
+        .disclaimer {
+            background: rgba(255,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>⚽ Haven Clipper Football Predictions</h1>
+    <p>by Bigvai KE • Real-time football data</p>
+    
+    <div class="card">
+        <input type="text" id="homeTeam" placeholder="Home Team" value="Arsenal">
+        <input type="text" id="awayTeam" placeholder="Away Team" value="Chelsea">
+        <button onclick="getPrediction()">🔮 PREDICT NOW</button>
+        
+        <div id="result" class="result">
+            Enter teams and click predict!
+        </div>
+        
+        <div class="disclaimer">
+            ⚠️ IMPORTANT: Bet responsibly. This tool is for entertainment only. Betting can be addictive and lead to loss of money.
+        </div>
+    </div>
+</div>
+
+<script>
+    async function getPrediction() {
+        const homeTeam = document.getElementById('homeTeam').value;
+        const awayTeam = document.getElementById('awayTeam').value;
+        const resultDiv = document.getElementById('result');
+        
+        resultDiv.innerHTML = "🔍 Fetching live football data...";
+        
+        try {
+            const response = await fetch('http://localhost:3001/api/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ homeTeam, awayTeam })
+            });
+            
+            const data = await response.json();
+            
+            if (data.error) {
+                resultDiv.innerHTML = `❌ Error: ${data.error}`;
+                return;
+            }
+            
+            const consensus = data.analysis.expertConsensus.consensus;
+            const homeProb = data.analysis.expertConsensus.averageHomeProb;
+            const drawProb = data.analysis.expertConsensus.averageDrawProb;
+            const awayProb = data.analysis.expertConsensus.averageAwayProb;
+            
+            resultDiv.innerHTML = `
+                <h2>🎯 PREDICTION: ${consensus}</h2>
+                <p>📊 Probabilities:</p>
+                <ul>
+                    <li>🏠 ${homeTeam} win: ${homeProb}%</li>
+                    <li>🤝 Draw: ${drawProb}%</li>
+                    <li>✈️ ${awayTeam} win: ${awayProb}%</li>
+                </ul>
+                <p>📈 Form: ${homeTeam}: ${data.analysis.homeForm.formString} | ${awayTeam}: ${data.analysis.awayForm.formString}</p>
+                <p>⚔️ Head-to-Head: ${data.analysis.h2h.homeWins} wins, ${data.analysis.h2h.draws} draws, ${data.analysis.h2h.awayWins} wins</p>
+                <p><small>Data from: WhoScored, FlashScore, WinDrawWin, LeagueLane</small></p>
+            `;
+        } catch (error) {
+            resultDiv.innerHTML = `❌ Cannot connect to backend!<br><br>
+            Make sure you have started the backend robot:<br>
+            1. Open Command Prompt<br>
+            2. Type: cd Desktop/football-predictions/backend<br>
+            3. Type: npm install<br>
+            4. Type: npm start<br>
+            <br>Error: ${error.message}`;
+        }
+    }
+</script>
+</body>
+</html>
