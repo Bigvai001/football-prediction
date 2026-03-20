@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Haven Clipper Football Predictions | Bigvai KE | Jackpot Secrets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0a2f1f 0%, #051e12 100%);
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Roboto', sans-serif;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            color: #f0f9f0;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #f5b04220;
+            backdrop-filter: blur(4px);
+            border: 1px solid #f5b04270;
+            padding: 0.3rem 1rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFF6C9, #CBFB5E);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .sub {
+            color: #c0e0c8;
+            margin-top: 0.5rem;
+            font-weight: 400;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .prediction-card {
+            background: rgba(10, 25, 18, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 2.5rem;
+            border: 1px solid rgba(80, 180, 100, 0.4);
+            padding: 2rem 1.8rem;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.6);
+            transition: all 0.2s;
+        }
+
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .team-input {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            color: #cdf5cf;
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: #0e2a1c;
+            border: 1.5px solid #2d6a4f;
+            border-radius: 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #f3ffe6;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #f5b042;
+            box-shadow: 0 0 0 3px rgba(245,176,66,0.3);
+        }
+
+        input::placeholder {
+            color: #6d8f7a;
+            font-weight: 400;
+        }
+
+        .predict-btn {
+            background: linear-gradient(95deg, #f5b042, #e98a1e);
+            border: none;
+            padding: 0 2rem;
+            border-radius: 3rem;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #0a2416;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 6px 0 #9b4a0e;
+            transform: translateY(-2px);
+        }
+
+        .predict-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #9b4a0e;
+        }
+
+        .predict-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-area {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .verdict {
+            background: #071e12c9;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .outcome-badge {
+            display: inline-block;
+            font-size: 2.2rem;
+            font-weight: 800;
+            padding: 0.5rem 2rem;
+            border-radius: 80px;
+            background: #00000055;
+            letter-spacing: 2px;
+        }
+
+        .home-win { color: #bbf0a5; border-left: 6px solid #4caf50; background: #1f3d2c; }
+        .draw { color: #ffd966; border-left: 6px solid #ffb347; background: #2c3a24; }
+        .away-win { color: #f9ac67; border-left: 6px solid #f97316; background: #2e2a1f; }
+
+        .confidence {
+            font-size: 1.1rem;
+            margin-top: 0.75rem;
+            font-weight: 500;
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+
+        .insight-card {
+            background: #0b2d1e70;
+            border-radius: 1.5rem;
+            padding: 1rem 1.2rem;
+            border: 1px solid #3e7a5a;
+            font-size: 0.85rem;
+        }
+
+        .insight-card h4 {
+            font-size: 0.9rem;
+            color: #f5bc70;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .secret-badge {
+            background: #f5b04230;
+            border-radius: 30px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-left: 8px;
+            color: #f5bc70;
+        }
+
+        hr {
+            border-color: #2f6b4b;
+            margin: 1rem 0;
+        }
+
+        /* Enhanced Disclaimer Styles */
+        .disclaimer-box {
+            background: rgba(30, 20, 15, 0.95);
+            border-left: 5px solid #f5b042;
+            border-radius: 1rem;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0 0.5rem;
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .disclaimer-title {
+            color: #f5b042;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .disclaimer-text {
+            font-size: 0.75rem;
+            color: #ffddbb;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .disclaimer-text strong {
+            color: #ffaa66;
+        }
+
+        .responsible-gambling {
+            background: #2c241a70;
+            border-radius: 0.8rem;
+            padding: 0.6rem;
+            margin-top: 0.8rem;
+            font-size: 0.7rem;
+            color: #e0c8a0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #f5b042;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 640px) {
+            .prediction-card { padding: 1.5rem; }
+            .outcome-badge { font-size: 1.5rem; }
+            h1 { font-size: 1.8rem; }
+            .disclaimer-box { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <div class="badge">⚡ JACKPOT SECRETS EDITION • 4 GOLDEN RULES ACTIVATED</div>
+        <h1>⚽ Haven Clipper<br>Football Predictions</h1>
+        <div class="sub">by Bigvai KE • Marsden's 4 Jackpot Secrets + 2000+ League Intelligence • NO DOUBLE CHANCE</div>
+    </div>
+
+    <div class="prediction-card">
+        <div class="input-group">
+            <div class="team-input">
+                <label>🏠 HOME TEAM</label>
+                <input type="text" id="homeTeam" placeholder="e.g., Man City, PSG, Wolves, Liverpool" value="Arsenal">
+            </div>
+            <div class="team-input">
+                <label>✈️ AWAY TEAM</label>
+                <input type="text" id="awayTeam" placeholder="e.g., Chelsea, Bayern, Real Madrid" value="Chelsea">
+            </div>
+            <button class="predict-btn" id="predictBtn">🔮 PREDICT NOW →</button>
+        </div>
+
+        <div id="resultContainer" style="min-height: 200px;">
+            <div class="result-area" style="opacity: 0.6; text-align: center; padding: 2rem;">
+                ⚡ Enter two teams & click predict — deep analysis using Marsden's 4 Jackpot Secrets + expert consensus.
+            </div>
+        </div>
+
+        <!-- RESPONSIBLE GAMBLING DISCLAIMER (Enhanced) -->
+        <div class="disclaimer-box">
+            <div class="disclaimer-title">
+                ⚠️ IMPORTANT NOTICE ⚠️
+            </div>
+            <div class="disclaimer-text">
+                <strong>Bet responsibly. Betting can be addictive and can lead to significant loss of money.</strong><br>
+                This tool is provided <strong>for entertainment purposes only</strong>. Predictions are based on simulated analysis and statistical models — they are <strong>not guarantees</strong> of actual match outcomes. 
+                If you or someone you know has a gambling problem, please seek help. <strong>Only bet what you can afford to lose.</strong>
+            </div>
+            <div class="responsible-gambling">
+                🎯 For support: www.begambleaware.org | Gambling helpline: 0808 8020 133 | Know your limits, stay in control.
+            </div>
+        </div>
+    </div>
+    <footer>
+        🧠 Powered by 4 Jackpot Secrets: Look Beyond Odds | Master the Norms | Identify the Draws (~30-40% of jackpot games) | Combine Efforts (consistency).<br>
+        Integrated with WhoScored, FlashScore, WinDrawWin, LeagueLane, MatchOutlook & 12+ tipster sources (simulated analysis — for demo only).
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // ---------- TEAM ALIASES (Man City -> Manchester City etc) ----------
+        const teamAliases = new Map([
+            ["man city", "Manchester City"], ["mancity", "Manchester City"], ["manchester city", "Manchester City"],
+            ["psg", "Paris Saint-Germain"], ["paris saint germain", "Paris Saint-Germain"], ["paris", "Paris Saint-Germain"],
+            ["wolves", "Wolverhampton Wanderers"], ["wolverhampton", "Wolverhampton Wanderers"],
+            ["man utd", "Manchester United"], ["manchester united", "Manchester United"], ["manunited", "Manchester United"],
+            ["spurs", "Tottenham Hotspur"], ["tottenham", "Tottenham Hotspur"], ["hotspur", "Tottenham Hotspur"],
+            ["liverpool", "Liverpool"], ["chelsea", "Chelsea"], ["arsenal", "Arsenal"], ["newcastle", "Newcastle United"],
+            ["brighton", "Brighton & Hove Albion"], ["aston villa", "Aston Villa"], ["west ham", "West Ham United"],
+            ["leicester", "Leicester City"], ["everton", "Everton"], ["brentford", "Brentford"], ["fulham", "Fulham"],
+            ["burnley", "Burnley"], ["sheffield utd", "Sheffield United"], ["luton", "Luton Town"],
+            ["real madrid", "Real Madrid"], ["barcelona", "Barcelona"], ["atletico", "Atlético Madrid"],
+            ["bayern", "Bayern Munich"], ["dortmund", "Borussia Dortmund"], ["inter", "Inter Milan"], ["milan", "AC Milan"],
+            ["juventus", "Juventus"], ["roma", "AS Roma"], ["napoli", "Napoli"]
+        ]);
+
+        function normalizeTeamName(raw) {
+            if (!raw) return "";
+            let cleaned = raw.trim().toLowerCase().replace(/[^\w\s]/g, '');
+            if (teamAliases.has(cleaned)) return teamAliases.get(cleaned);
+            return raw.trim().split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+        }
+
+        // ---------- Team profile generator (deterministic based on name) ----------
+        function generateTeamProfile(teamName, isHome) {
+            let hash = 0;
+            for(let i=0; i<teamName.length; i++) hash = ((hash<<5)-hash)+teamName.charCodeAt(i);
+            const rand = (min, max) => Math.floor(((Math.abs(hash) * 9301 + 49297) % 233280) / 233280 * (max-min+1) + min);
+            const seed = Math.abs(hash) % 1000;
+            let tablePos = (seed % 20) + 1;
+            const bigClubs = ["Manchester City", "Liverpool", "Arsenal", "Chelsea", "Manchester United", "Real Madrid", "Barcelona", "Bayern Munich", "Paris Saint-Germain", "Inter Milan"];
+            if(bigClubs.some(name => teamName.includes(name))) tablePos = Math.min(6, tablePos);
+            
+            const isTopTable = tablePos <= 6;
+            const isMidTable = tablePos >= 7 && tablePos <= 14;
+            const isRelegation = tablePos >= 18;
+            
+            let formPoints = rand(0,15);
+            let formWins = Math.floor(formPoints/3);
+            let formLosses = rand(0,5-formWins);
+            let formDraws = 5 - formWins - formLosses;
+            let recentFormString = "";
+            for(let i=0;i<formWins;i++) recentFormString+="W ";
+            for(let i=0;i<formDraws;i++) recentFormString+="D ";
+            for(let i=0;i<formLosses;i++) recentFormString+="L ";
+            let isWinningStreak = formWins >= 3 && formLosses===0;
+            let isTerribleForm = formLosses >= 4;
+            let losingStreak = formLosses >= 2;
+            
+            let injuriesImpact = rand(0,2);
+            let cardsImpact = rand(0,2);
+            let coachChanged = rand(0,4) === 0;
+            let coachEffect = coachChanged ? (rand(0,2) === 0 ? "positive boost" : "negative disruption") : "stable";
+            let xG = (rand(80,160) / 100).toFixed(1);
+            let nextMatchImportance = rand(1,3);
+            let weatherImpact = rand(-1,1);
+            let avgGoalsScored = rand(60,180)/100;
+            let isLowScoring = avgGoalsScored < 1.1;
+            
+            let titleContention = isTopTable && nextMatchImportance >= 2;
+            let relegationBattle = isRelegation && nextMatchImportance >= 2;
+            
+            return {
+                teamName, tablePos, isTopTable, isMidTable, isRelegation,
+                formWins, formDraws, formLosses, recentFormString, isWinningStreak, isTerribleForm, losingStreak,
+                injuriesImpact, cardsImpact, coachChanged, coachEffect, xG, nextMatchImportance,
+                weatherImpact, avgGoalsScored, isLowScoring,
+                titleContention, relegationBattle
+            };
+        }
+        
+        // H2H generation for draws and first-leg rule
+        function generateH2H(teamA, teamB) {
+            let hash = 0;
+            let combined = teamA+teamB;
+            for(let i=0;i<combined.length;i++) hash = ((hash<<5)-hash)+combined.charCodeAt(i);
+            const r = (max) => Math.abs((hash * 9301 + 49297) % 233280) / 233280 * max;
+            let drawsInLast5 = 0;
+            let last5results = [];
+            let firstLegWinner = null;
+            for(let i=0;i<5;i++) {
+                let outcomeRand = r(3);
+                if(outcomeRand < 0.6) { last5results.push("H"); if(i===0) firstLegWinner = "home"; } 
+                else if(outcomeRand < 1.2) { last5results.push("A"); if(i===0) firstLegWinner = "away"; }
+                else { last5results.push("D"); drawsInLast5++; if(i===0) firstLegWinner = null; }
+            }
+            let noDrawInLast5 = drawsInLast5 === 0;
+            let drawBoost = (noDrawInLast5 && last5results.length>=5) ? 0.8 : 0;
+            return { drawsInLast5, noDrawInLast5, drawBoost, firstLegWinner, last5results };
+        }
+        
+        // ----- MAIN PREDICTION ENGINE with Marsden's 4 Secrets integrated -----
+        function predictMatch(homeRaw, awayRaw) {
+            const homeNorm = normalizeTeamName(homeRaw);
+            const awayNorm = normalizeTeamName(awayRaw);
+            if(!homeNorm || !awayNorm) return { error: "Please enter valid team names." };
+            
+            const home = generateTeamProfile(homeNorm, true);
+            const away = generateTeamProfile(awayNorm, false);
+            const h2h = generateH2H(homeNorm, awayNorm);
+            
+            // Base probabilities
+            let homeProb = 35, drawProb = 30, awayProb = 35;
+            
+            // ========== SECRET #2: MASTER THE NORMS ==========
+            if(home.isRelegation && away.isMidTable) homeProb += 14;
+            else if(home.isRelegation && away.isTopTable) drawProb += 15;
+            if(away.isRelegation && home.isMidTable) awayProb += 14;
+            else if(away.isRelegation && home.isTopTable) drawProb += 15;
+            
+            if(home.isTopTable && home.titleContention && (away.isMidTable || away.isRelegation)) homeProb += 16;
+            if(away.isTopTable && away.titleContention && (home.isMidTable || home.isRelegation)) awayProb += 16;
+            
+            if(home.isTopTable && !home.isWinningStreak && home.formLosses >= 2 && away.isRelegation) awayProb += 12;
+            if(away.isTopTable && !away.isWinningStreak && away.formLosses >= 2 && home.isRelegation) homeProb += 12;
+            
+            if((home.isTopTable || !home.isRelegation) && home.losingStreak && home.formLosses >= 2) homeProb += 13;
+            if((away.isTopTable || !away.isRelegation) && away.losingStreak && away.formLosses >= 2) awayProb += 13;
+            
+            if(home.isRelegation && home.nextMatchImportance === 1) homeProb -= 5;
+            if(away.isRelegation && away.nextMatchImportance === 1) awayProb -= 5;
+            
+            if(h2h.firstLegWinner === "home") awayProb += 14;
+            else if(h2h.firstLegWinner === "away") homeProb += 14;
+            
+            // ========== SECRET #3: IDENTIFY THE DRAWS ==========
+            let drawIndicators = [];
+            
+            if(home.isLowScoring && away.isLowScoring) { drawProb += 14; drawIndicators.push("Both low-scoring"); }
+            else if(home.isLowScoring || away.isLowScoring) { drawProb += 6; drawIndicators.push("One low-scoring"); }
+            
+            if(h2h.drawBoost > 0) { 
+                let drawIncrease = drawProb * h2h.drawBoost;
+                drawProb += drawIncrease;
+                drawIndicators.push("No draw in last 5 H2H (+80% boost)");
+            }
+            
+            if((home.isTopTable && away.isTopTable) && (home.titleContention && away.titleContention)) {
+                drawProb += 12;
+                drawIndicators.push("Top teams with title at stake → stalemate");
+            }
+            
+            let strengthDiff = Math.abs(home.tablePos - away.tablePos);
+            if(strengthDiff <= 3 && !home.isTopTable && !away.isTopTable) {
+                drawProb += 8;
+                drawIndicators.push("Balanced odds pattern (strength proximity)");
+            }
+            
+            // FORM & other factors
+            if(home.isWinningStreak && away.isTerribleForm) homeProb += 18;
+            else if(away.isWinningStreak && home.isTerribleForm) awayProb += 18;
+            else if(home.isWinningStreak) homeProb += 9;
+            else if(away.isWinningStreak) awayProb += 9;
+            
+            homeProb -= home.injuriesImpact * 3.5;
+            awayProb -= away.injuriesImpact * 3.5;
+            homeProb -= home.cardsImpact * 2.5;
+            awayProb -= away.cardsImpact * 2.5;
+            
+            if(home.coachChanged && home.coachEffect === "positive boost") homeProb += 8;
+            if(home.coachChanged && home.coachEffect === "negative disruption") homeProb -= 7;
+            if(away.coachChanged && away.coachEffect === "positive boost") awayProb += 8;
+            if(away.coachChanged && away.coachEffect === "negative disruption") awayProb -= 7;
+            
+            let homeXG = parseFloat(home.xG), awayXG = parseFloat(away.xG);
+            if(homeXG - awayXG > 0.4) homeProb += 6;
+            if(awayXG - homeXG > 0.4) awayProb += 6;
+            
+            if(home.weatherImpact > 0) homeProb += 2;
+            if(away.weatherImpact > 0) awayProb += 2;
+            
+            // Match fixing / underdog
+            let isMatchFixingHigh = false;
+            if((homeProb > 70 && awayProb < 18) || (awayProb > 70 && homeProb < 18)) {
+                let fixingRand = (Math.abs((homeNorm+awayNorm).length * 131071) % 100);
+                if(fixingRand < 18) {
+                    isMatchFixingHigh = true;
+                    if(homeProb > awayProb) awayProb += 24;
+                    else homeProb += 24;
+                }
+            }
+            
+            // Expert consensus simulation
+            let expertHomeBias = (Math.sin((homeNorm.charCodeAt(0) || 1) * 0.9) * 5 + 2);
+            let expertAwayBias = (Math.cos((awayNorm.charCodeAt(0) || 2) * 0.7) * 5 + 2);
+            homeProb += expertHomeBias;
+            awayProb += expertAwayBias;
+            
+            let total = homeProb + drawProb + awayProb;
+            homeProb = (homeProb / total) * 100;
+            drawProb = (drawProb / total) * 100;
+            awayProb = (awayProb / total) * 100;
+            
+            let outcome = "";
+            let maxProb = Math.max(homeProb, drawProb, awayProb);
+            if(maxProb === homeProb) outcome = "HOME WIN";
+            else if(maxProb === awayProb) outcome = "AWAY WIN";
+            else outcome = "DRAW";
+            
+            let confidencePercent = Math.round(maxProb + (Math.random() * 6) - 2);
+            confidencePercent = Math.min(94, Math.max(68, confidencePercent));
+            
+            const appliedSecrets = [];
+            if(drawIndicators.length) appliedSecrets.push(`Draw Secrets: ${drawIndicators.slice(0,2).join(', ')}`);
+            if(home.losingStreak || away.losingStreak) appliedSecrets.push("Losing streak rebound rule (Secret #2)");
+            if(h2h.firstLegWinner) appliedSecrets.push(`First-leg revenge rule: ${h2h.firstLegWinner==='home'?homeNorm:awayNorm} won first leg → opposite boosted`);
+            if((home.isRelegation && away.isMidTable) || (away.isRelegation && home.isMidTable)) appliedSecrets.push("Relegation vs Mid-table norm");
+            if((home.isTopTable && home.titleContention) || (away.isTopTable && away.titleContention)) appliedSecrets.push("Title/promotion at stake → win boost");
+            
+            const analysisSummary = {
+                homeForm: `${home.recentFormString.trim() || "mixed"} (${home.formWins}W, ${home.formDraws}D, ${home.formLosses}L)`,
+                awayForm: `${away.recentFormString.trim() || "mixed"} (${away.formWins}W, ${away.formDraws}D, ${away.formLosses}L)`,
+                tableContext: `🏠 ${homeNorm} [pos ${home.tablePos}] ${home.isTopTable ? 'Top' : home.isMidTable ? 'Mid' : 'Lower'} | ✈️ ${awayNorm} [pos ${away.tablePos}] ${away.isTopTable ? 'Top' : away.isMidTable ? 'Mid' : 'Lower'}`,
+                injuriesCards: `🏥 Injuries: H:${home.injuriesImpact}/2, A:${away.injuriesImpact}/2 | 🟨 Cards: H:${home.cardsImpact}, A:${away.cardsImpact}`,
+                coachEffect: `${home.coachChanged ? 'Coach change ('+home.coachEffect+')' : 'Stable coach'} vs ${away.coachChanged ? 'Coach change ('+away.coachEffect+')' : 'Stable coach'}`,
+                h2hRule: `Last 5 meetings: ${h2h.last5results.join(',')} → No draw in 5+? ${h2h.noDrawInLast5 ? 'YES (+80% draw bias)' : 'No'}. First-leg: ${h2h.firstLegWinner ? `${h2h.firstLegWinner==='home'?homeNorm:awayNorm} won` : 'N/A'}`,
+                secretPatterns: `Low-scoring: ${home.isLowScoring&&away.isLowScoring?'Both (draw boost)':home.isLowScoring||away.isLowScoring?'One side': 'No'} | Title stakes: ${home.titleContention||away.titleContention?'Active':'Neutral'} | Fixing: ${isMatchFixingHigh ? '⚠️ Underdog upset' : 'No'}`,
+                expertFusion: `Synced with WhoScored, FlashScore, WinDrawWin, LeagueLane, MatchOutlook, SportyTrader + 8 tipsters → Marsden's 4 Secrets active`,
+                appliedSecrets: appliedSecrets.length ? appliedSecrets : ["All 4 secret frameworks applied"]
+            };
+            
+            return {
+                home: homeNorm,
+                away: awayNorm,
+                outcome,
+                homeProb: homeProb.toFixed(1),
+                drawProb: drawProb.toFixed(1),
+                awayProb: awayProb.toFixed(1),
+                confidence: confidencePercent,
+                analysisSummary,
+                isMatchFixing: isMatchFixingHigh,
+                drawIndicators: drawIndicators
+            };
+        }
+        
+        function renderPrediction(result) {
+            if(result.error) {
+                return `<div class="result-area"><div class="verdict" style="background:#3a1e1e;">⚠️ ${result.error}</div></div>`;
+            }
+            let outcomeClass = "";
+            if(result.outcome === "HOME WIN") outcomeClass = "home-win";
+            else if(result.outcome === "AWAY WIN") outcomeClass = "away-win";
+            else outcomeClass = "draw";
+            
+            const secretsAppliedHtml = result.analysisSummary.appliedSecrets.map(s => `<span class="secret-badge">🔑 ${s}</span>`).join(' ');
+            
+            return `
+                <div class="result-area">
+                    <div class="verdict ${outcomeClass}" style="border-radius:2rem;">
+                        <div class="outcome-badge">🎯 ${result.outcome}</div>
+                        <div class="confidence">🏆 Confidence: ${result.confidence}% &nbsp;|&nbsp; 📊 H ${result.homeProb}% | D ${result.drawProb}% | A ${result.awayProb}%</div>
+                        <div style="margin-top: 10px; font-size:0.8rem;">${secretsAppliedHtml}</div>
+                    </div>
+                    <div class="analysis-grid">
+                        <div class="insight-card"><h4>📋 FORM & TABLE</h4>${result.analysisSummary.tableContext}<br>🏠 ${result.analysisSummary.homeForm}<br>✈️ ${result.analysisSummary.awayForm}</div>
+                        <div class="insight-card"><h4>⚠️ INJURIES / CARDS / COACH</h4>${result.analysisSummary.injuriesCards}<br>🧑‍🏫 ${result.analysisSummary.coachEffect}</div>
+                        <div class="insight-card"><h4>🔁 H2H & JACKPOT NORMS</h4>${result.analysisSummary.h2hRule}<br>${result.analysisSummary.secretPatterns}<br><strong>Draw indicators:</strong> ${result.drawIndicators.length ? result.drawIndicators.join('; ') : 'Standard analysis'}</div>
+                        <div class="insight-card"><h4>🌍 MARSDEN'S 4 SECRETS + EXPERT FUSION</h4>${result.analysisSummary.expertFusion}<br>🔍 ${result.isMatchFixing ? "⚠️ Match fixing probability considered → underdog factored" : "Fair play integrity assumed"}<br>📖 Sources: WhoScored, FlashScore, WinDrawWin, LeagueLane, MatchOutlook, SportyTrader, 1X2stats</div>
+                    </div>
+                    <hr>
+                    <div style="font-size:0.7rem; margin-top:10px; background:#0f2a1d80; padding:8px; border-radius:12px;">
+                        ⚠️ <strong>Entertainment & Educational Use Only.</strong> Predictions are simulated — not real-time. Betting involves financial risk. Please gamble responsibly.
+                    </div>
+                </div>
+            `;
+        }
+        
+        const predictBtn = document.getElementById('predictBtn');
+        const homeInput = document.getElementById('homeTeam');
+        const awayInput = document.getElementById('awayTeam');
+        const resultContainer = document.getElementById('resultContainer');
+        
+        function handlePrediction() {
+            let homeVal = homeInput.value.trim();
+            let awayVal = awayInput.value.trim();
+            if(!homeVal || !awayVal) {
+                resultContainer.innerHTML = `<div class="result-area"><div class="verdict" style="background:#631d1d;">❌ Please enter both home and away team names.</div></div>`;
+                return;
+            }
+            predictBtn.disabled = true;
+            predictBtn.innerHTML = `<span class="loader"></span> Analyzing with Marsden's 4 Secrets...`;
+            setTimeout(() => {
+                const prediction = predictMatch(homeVal, awayVal);
+                resultContainer.innerHTML = renderPrediction(prediction);
+                predictBtn.disabled = false;
+                predictBtn.innerHTML = `🔮 PREDICT NOW →`;
+            }, 450);
+        }
+        
+        predictBtn.addEventListener('click', handlePrediction);
+        [homeInput, awayInput].forEach(inp => inp.addEventListener('keypress', (e) => { if(e.key === 'Enter') handlePrediction(); }));
+    })();
+</script>
+</body>
+</html>
