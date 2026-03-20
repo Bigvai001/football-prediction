@@ -86,7 +86,7 @@
         resultDiv.innerHTML = "🔍 Fetching live football data...";
         
         try {
-            const response = await fetch('http://localhost:3001/api/predict', {
+            const response = await fetch('https://football-prediction-api.onrender.com/api/predict', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ homeTeam, awayTeam })
