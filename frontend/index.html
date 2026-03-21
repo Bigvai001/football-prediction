@@ -28,6 +28,7 @@
             border-radius: 10px;
             border: none;
             width: 200px;
+            font-size: 16px;
         }
         button {
             background: orange;
@@ -37,9 +38,14 @@
             border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
+            font-size: 16px;
         }
         button:hover {
             background: darkorange;
+        }
+        button:disabled {
+            background: gray;
+            cursor: not-allowed;
         }
         .result {
             margin-top: 20px;
@@ -55,75 +61,164 @@
             font-size: 12px;
             text-align: center;
         }
+        .prediction {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .home-win { background: #2c5a2c; color: #90EE90; }
+        .draw { background: #5a4a2c; color: #FFD700; }
+        .away-win { background: #5a2c2c; color: #FFA07A; }
+        .status {
+            padding: 15px;
+            background: #2c3e2a;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .error {
+            background: #631d1d;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .prob-bar {
+            background: #1e3a2a;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        .prob-fill {
+            padding: 8px;
+            color: white;
+            text-align: center;
+            font-size: 12px;
+        }
+        .home-fill { background: #4caf50; }
+        .draw-fill { background: #ff9800; }
+        .away-fill { background: #f44336; }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>⚽ Haven Clipper Football Predictions</h1>
-    <p>by Bigvai KE • Real-time football data</p>
+    <p>by Bigvai KE • Live football data</p>
     
     <div class="card">
         <input type="text" id="homeTeam" placeholder="Home Team" value="Arsenal">
         <input type="text" id="awayTeam" placeholder="Away Team" value="Chelsea">
-        <button onclick="getPrediction()">🔮 PREDICT NOW</button>
+        <button onclick="getPrediction()" id="predictBtn">🔮 PREDICT NOW</button>
         
         <div id="result" class="result">
-            Enter teams and click predict!
+            👆 Enter teams and click predict!
         </div>
         
         <div class="disclaimer">
-            ⚠️ IMPORTANT: Bet responsibly. This tool is for entertainment only. Betting can be addictive and lead to loss of money.
+            ⚠️ <strong>BET RESPONSIBLY</strong><br>
+            This tool is for entertainment purposes only. Betting can be addictive and can lead to significant loss of money.
+            Only bet what you can afford to lose.
         </div>
     </div>
 </div>
 
 <script>
     async function getPrediction() {
-        const homeTeam = document.getElementById('homeTeam').value;
-        const awayTeam = document.getElementById('awayTeam').value;
+        const homeTeam = document.getElementById('homeTeam').value.trim();
+        const awayTeam = document.getElementById('awayTeam').value.trim();
         const resultDiv = document.getElementById('result');
+        const predictBtn = document.getElementById('predictBtn');
         
-        resultDiv.innerHTML = "🔍 Fetching live football data...";
+        if (!homeTeam || !awayTeam) {
+            resultDiv.innerHTML = '<div class="error">❌ Please enter both team names!</div>';
+            return;
+        }
+        
+        predictBtn.disabled = true;
+        predictBtn.textContent = '⏳ FETCHING DATA...';
+        resultDiv.innerHTML = '<div class="status">🔍 Fetching live football data...</div>';
         
         try {
-            const response = await fetch('https://football-prediction-api.onrender.com/api/predict', {
+            const response = await fetch('http://localhost:3001/api/predict', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ homeTeam, awayTeam })
             });
             
-            const data = await response.json();
-            
-            if (data.error) {
-                resultDiv.innerHTML = `❌ Error: ${data.error}`;
-                return;
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
             }
+            
+            const data = await response.json();
             
             const consensus = data.analysis.expertConsensus.consensus;
             const homeProb = data.analysis.expertConsensus.averageHomeProb;
             const drawProb = data.analysis.expertConsensus.averageDrawProb;
             const awayProb = data.analysis.expertConsensus.averageAwayProb;
             
+            let predictionClass = "";
+            if (consensus === "HOME WIN") predictionClass = "home-win";
+            else if (consensus === "AWAY WIN") predictionClass = "away-win";
+            else predictionClass = "draw";
+            
             resultDiv.innerHTML = `
-                <h2>🎯 PREDICTION: ${consensus}</h2>
-                <p>📊 Probabilities:</p>
-                <ul>
-                    <li>🏠 ${homeTeam} win: ${homeProb}%</li>
-                    <li>🤝 Draw: ${drawProb}%</li>
-                    <li>✈️ ${awayTeam} win: ${awayProb}%</li>
-                </ul>
-                <p>📈 Form: ${homeTeam}: ${data.analysis.homeForm.formString} | ${awayTeam}: ${data.analysis.awayForm.formString}</p>
-                <p>⚔️ Head-to-Head: ${data.analysis.h2h.homeWins} wins, ${data.analysis.h2h.draws} draws, ${data.analysis.h2h.awayWins} wins</p>
-                <p><small>Data from: WhoScored, FlashScore, WinDrawWin, LeagueLane</small></p>
+                <div class="prediction ${predictionClass}">
+                    🎯 PREDICTION: ${consensus}
+                </div>
+                
+                <div class="status">
+                    <strong>📊 PROBABILITIES</strong>
+                    <div class="prob-bar">
+                        <div class="prob-fill home-fill" style="width: ${homeProb}%">🏠 ${homeProb}%</div>
+                    </div>
+                    <div class="prob-bar">
+                        <div class="prob-fill draw-fill" style="width: ${drawProb}%">🤝 ${drawProb}%</div>
+                    </div>
+                    <div class="prob-bar">
+                        <div class="prob-fill away-fill" style="width: ${awayProb}%">✈️ ${awayProb}%</div>
+                    </div>
+                </div>
+                
+                <div class="status">
+                    <strong>📈 RECENT FORM</strong><br>
+                    🏠 ${homeTeam}: ${data.analysis.homeForm.formString}<br>
+                    ✈️ ${awayTeam}: ${data.analysis.awayForm.formString}
+                </div>
+                
+                <div class="status">
+                    <strong>⚔️ HEAD-TO-HEAD</strong><br>
+                    🏠 ${homeTeam} wins: ${data.analysis.h2h.homeWins}<br>
+                    🤝 Draws: ${data.analysis.h2h.draws}<br>
+                    ✈️ ${awayTeam} wins: ${data.analysis.h2h.awayWins}
+                </div>
+                
+                <div class="status">
+                    <strong>🏆 LEAGUE POSITION</strong><br>
+                    🏠 ${homeTeam}: Position ${data.analysis.homeStandings.position}<br>
+                    ✈️ ${awayTeam}: Position ${data.analysis.awayStandings.position}
+                </div>
+                
+                <p style="font-size: 11px; margin-top: 15px; text-align: center; opacity: 0.7;">
+                    ⏱️ ${new Date(data.timestamp).toLocaleString()}
+                </p>
             `;
+            
         } catch (error) {
-            resultDiv.innerHTML = `❌ Cannot connect to backend!<br><br>
-            Make sure you have started the backend robot:<br>
-            1. Open Command Prompt<br>
-            2. Type: cd Desktop/football-predictions/backend<br>
-            3. Type: npm install<br>
-            4. Type: npm start<br>
-            <br>Error: ${error.message}`;
+            resultDiv.innerHTML = `
+                <div class="error">
+                    ❌ <strong>Cannot connect to the football robot!</strong><br><br>
+                    <strong>How to fix:</strong><br>
+                    1. Open a NEW Command Prompt window<br>
+                    2. Type: cd OneDrive\Desktop\football-predictions\backend<br>
+                    3. Type: npm start<br>
+                    4. Keep that window open, then click PREDICT NOW again<br><br>
+                    Error: ${error.message}
+                </div>
+            `;
+        } finally {
+            predictBtn.disabled = false;
+            predictBtn.textContent = '🔮 PREDICT NOW';
         }
     }
 </script>
