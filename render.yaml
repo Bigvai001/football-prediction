@@ -1,0 +1,6 @@
+services:
+  - type: static
+    name: football-prediction
+    buildCommand: ""
+    publish: .
+    branch: main
